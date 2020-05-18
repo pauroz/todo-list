@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/pauroz/todo-list#readme",
   "dependencies": {
+    "-": "0.0.1",
     "@koa/router": "^8.0.8",
+    "favicon": "0.0.2",
     "koa": "^2.11.0",
+    "koa-favicon": "^2.1.0",
+    "koa-icon": "^1.0.4",
     "koa-logger": "^3.2.1",
-   
     "koa-static": "^5.0.0"
   }
 }

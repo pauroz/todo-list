@@ -1,6 +1,6 @@
 
 const storage = require('azure-storage')
-const service = storage.createTableService()
+const service = storage.createTableService('mtodo', 'SBRxpcI6i2PaoeWzedd32pwMsSohZQvUlVeIS2KqXlr2GyVrUnfJJ9QrqgyYg1/SZAagvWwdhFzKBw4iQxLAZA==')
 const table = 'tasks'
 
 const init = async () => (
@@ -11,6 +11,26 @@ const init = async () => (
   })
 )
 
+
+
+const uuid = require('uuid')
+
+
+  const addTask = async ({ addTaskMsg }) => (
+  new Promise((resolve, reject) => {
+    const gen = storage.TableUtilities.entityGenerator
+    const task = {
+      PartitionKey: gen.String('task'),
+      RowKey: gen.String(uuid.v4()),
+      addTaskMsg
+    }
+
+    service.insertEntity(table, task, (error) => {
+      !error ? resolve() : reject()
+    })
+  })
+)
 module.exports = {
-  init
+  init,
+  addTask
 }

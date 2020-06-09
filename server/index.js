@@ -5,6 +5,8 @@ const logger = require('koa-logger') //l1 zad2
 const favicon = require('koa-favicon') // l1 zad3
 //const favicon = require('koa-icon') //l1 zad3
 
+const parse = require('koa-bodyparser')
+
 require('./store').init()
 const app = new Koa()
 const port = process.env.PORT || 3000

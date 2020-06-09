@@ -16,13 +16,13 @@ const init = async () => (
 const uuid = require('uuid')
 
 
-  const addTask = async ({ addTaskMsg }) => (
+  const addTask = async ({ title }) => (
   new Promise((resolve, reject) => {
     const gen = storage.TableUtilities.entityGenerator
     const task = {
       PartitionKey: gen.String('task'),
       RowKey: gen.String(uuid.v4()),
-      addTaskMsg
+      title
     }
 
     service.insertEntity(table, task, (error) => {

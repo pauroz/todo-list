@@ -15,8 +15,7 @@ const init = async () => (
 
 const uuid = require('uuid')
 
-
-  const addTask = async ({ title }) => (
+const addTask = async ({ title }) => (
   new Promise((resolve, reject) => {
     const gen = storage.TableUtilities.entityGenerator
     const task = {
@@ -30,7 +29,22 @@ const uuid = require('uuid')
     })
   })
 )
+const listTasks = async () => (
+  new Promise((resolve, reject) => {
+    const query = new storage.TableQuery()
+      .select(['title'])
+      .where('PartitionKey eq ?', 'task')
+
+    service.queryEntities(table, query, null, (error, result) => {
+      !error ? resolve(result.entries.map((entry) => ({
+        title: entry.title._
+      }))) : reject()
+    })
+  })
+)
+
 module.exports = {
   init,
-  addTask
+  addTask,
+  listTasks
 }
